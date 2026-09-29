@@ -14,7 +14,7 @@ const BASE = [
   {type:'ai', src:commons("Room with an urealistic view on a forest landscape by AI; 'The Television's in Another Room'.jpg"), source:'Wikimedia Commons · Midjourney', note:'Diese Innenraumszene wurde mit Midjourney erzeugt. Architektur, Perspektive und Übergänge zwischen Möbeln sind gute Prüfstellen.'},
   {type:'real', src:picsum(1020), source:'Lorem Picsum · echtes Foto', note:'Ein echtes Foto. Bei schwierigen Bildern hilft es, mehrere Hinweise zusammen zu bewerten statt nur ein Detail.'}
 ];
-let deck=[], index=0, score=0, streak=0, bestStreak=0, locked=false;
+let deck=[], index=0, score=0, streak=0, bestStreak=0, locked=false, autoNextTimer=null;
 const $ = s => document.querySelector(s);
 const card=$('#card'), stage=$('#stage'), image=$('#image'), nextImage=$('#nextImage'), feedback=$('#feedback');
 
@@ -26,6 +26,7 @@ function shuffle(a){
   return a;
 }
 function start(){
+  if(autoNextTimer){clearTimeout(autoNextTimer);autoNextTimer=null}
   deck=shuffle([...BASE]); index=0; score=0; streak=0; bestStreak=0; locked=false;
   $('#endScreen').classList.remove('show');
   $('#controls').style.visibility='visible';
@@ -47,7 +48,12 @@ function resetCard(){
   $('#stampReal').style.opacity=0;
 }
 function loadRound(){
-  locked=false; feedback.classList.remove('show'); resetCard();
+  if(autoNextTimer){clearTimeout(autoNextTimer);autoNextTimer=null}
+  locked=false;
+  feedback.classList.remove('show');
+  $('#nextBtn').style.display='none';
+  $('#explanation').style.display='none';
+  resetCard();
   const item=deck[index];
   image.src=item.src;
   $('#roundText').textContent=`Runde ${index+1} von ${deck.length}`;
@@ -76,14 +82,21 @@ function choose(type){
   stamp.style.opacity=1;
   stamp.style.transform=`rotate(${dir*10}deg) scale(1)`;
   animateOut(type);
-  $('#resultText').textContent=correct?'✓ Richtig!':'✕ Leider falsch';
+  $('#resultText').textContent=correct?'✓ Richtig':'✕ Falsch';
   $('#resultText').className='result '+(correct?'good':'bad');
-  $('#truthText').textContent=item.type==='ai'?'Auflösung: KI':'Auflösung: ECHT';
-  $('#explanation').textContent=`${item.note} Quelle: ${item.source}`;
-  setTimeout(()=>feedback.classList.add('show'),220);
+  $('#truthText').textContent=item.type==='ai'?'Es war: KI':'Es war: Echt';
+  $('#explanation').textContent='';
+  $('#explanation').style.display='none';
+  $('#nextBtn').style.display='none';
+  setTimeout(()=>feedback.classList.add('show'),180);
+  autoNextTimer=setTimeout(()=>{
+    feedback.classList.remove('show');
+    next();
+  },1300);
 }
 function next(){
   if(!locked)return;
+  if(autoNextTimer){clearTimeout(autoNextTimer);autoNextTimer=null}
   index++;
   if(index>=deck.length){finish();return}
   $('#nextCard').style.transition='none';
