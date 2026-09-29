@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0d12" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="description" content="REAL OR AI? – Swipe links für KI, rechts für echt." />
+  <title>REAL OR AI? – Swipe Game</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<main class="app">
+    <header>
+      <div class="brand"><div class="logo">◐</div><div><span class="title">REAL OR AI?</span><span class="subtitle">Swipe & entlarve die KI</span></div></div>
+      <div class="scorebox"><div class="pill" id="scorePill">0 Punkte</div><div class="pill" id="streakPill">🔥 0</div></div>
+    </header>
+    <div class="progress"><div id="progressBar"></div></div>
+
+    <section class="stage" id="stage">
+      <article class="card next" id="nextCard" aria-hidden="true"><img class="photo" id="nextImage" alt="Nächstes Bild" /></article>
+      <article class="card" id="card" aria-label="Bildkarte. Nach links wischen für KI, nach rechts für echt.">
+        <img class="photo" id="image" alt="Ratebild: echt oder KI-generiert?" draggable="false" />
+        <div class="shade"></div>
+        <div class="stamp ai" id="stampAI">KI</div>
+        <div class="stamp real" id="stampReal">ECHT</div>
+        <div class="swipeLegend"><span class="l">← KI</span><span class="r">ECHT →</span></div>
+        <div class="question"><div class="kicker" id="roundText">Runde 1</div><h1>KI oder echtes Foto?</h1><p>Nach links = KI · nach rechts = echt</p></div>
+      </article>
+
+      <div class="feedback" id="feedback">
+        <div class="feedbackTop"><div class="result" id="resultText"></div><div class="truth" id="truthText"></div></div>
+        <p id="explanation"></p>
+        <button class="nextBtn" id="nextBtn">Nächstes Bild →</button>
+      </div>
+
+      <div class="end" id="endScreen">
+        <div class="emoji" id="endEmoji">🧠</div><h2>Runde beendet</h2><div class="percent" id="percent">0%</div>
+        <p id="summary">0 von 0 richtig</p><div class="bestline" id="bestLine"></div>
+        <div class="endActions"><button class="restart" id="restartBtn">Nochmal spielen</button><button class="share" id="shareBtn">Ergebnis teilen</button></div>
+      </div>
+
+      <div class="tutorial" id="tutorial">
+        <div class="tutorialBox"><div class="tutorialIcon">👆</div><h2>Einfach wischen</h2><p>Zieh das Bild wie bei Tinder. Entscheide, ob es von einer KI erzeugt wurde oder ein echtes Foto ist.</p><div class="tutorialGrid"><div class="tutorialChoice">← KI-generiert</div><div class="tutorialChoice">Echt →</div></div><button id="tutorialBtn">Los geht's</button></div>
+      </div>
+    </section>
+
+    <div class="controls" id="controls"><button class="choice ai" id="aiBtn"><span class="dot"></span> KI-generiert</button><button class="choice real" id="realBtn"><span class="dot"></span> Echtes Foto</button></div>
+    <div class="hint">Auch Licht, Texturen, Schrift und kleine Wiederholungen können Hinweise sein.</div>
+  </main>
+  <div class="toast" id="toast">Kopiert!</div>
+  <script src="app.js"></script>
+</body>
+</html>
