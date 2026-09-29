@@ -112,10 +112,12 @@ $('#restartBtn').onclick=start;
 $('#tutorialBtn').onclick=()=>{localStorage.setItem('realorai_tutorial','1');$('#tutorial').classList.add('hide')};
 if(localStorage.getItem('realorai_tutorial')==='1')$('#tutorial').classList.add('hide');
 $('#shareBtn').onclick=async()=>{
-  const txt=`REAL OR AI? – Ich hatte ${score}/${deck.length} richtig (${Math.round(score/deck.length*100)}%). Schaffst du mehr?`;
+  const pct=Math.round(score/deck.length*100);
+  const txt=`REAL OR AI? – Ich hatte ${score}/${deck.length} richtig (${pct}%). Schaffst du mehr?`;
+  const url=window.location.origin;
   try{
-    if(navigator.share) await navigator.share({title:'REAL OR AI?',text:txt});
-    else { await navigator.clipboard.writeText(txt); showToast('Ergebnis kopiert!'); }
+    if(navigator.share) await navigator.share({title:'REAL OR AI?',text:txt,url});
+    else { await navigator.clipboard.writeText(`${txt} ${url}`); showToast('Ergebnis + Link kopiert!'); }
   }catch(e){}
 };
 function showToast(t){
