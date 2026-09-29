@@ -2,6 +2,12 @@
 
 Ein Mobile-First-Swipe-Spiel nach dem Tinder-Prinzip: Spieler sehen ein Bild und entscheiden, ob es **KI-generiert** oder ein **echtes Foto** ist.
 
+## Live spielen
+
+**Production:** https://realorai-alpha.vercel.app
+
+Das Projekt ist mit Vercel verbunden und wird aus dem `main`-Branch von `frechdax/realorai` ausgeliefert.
+
 ## Spielprinzip
 
 - **Nach links wischen → KI-generiert**
@@ -62,11 +68,12 @@ npx serve .
 
 ## Deployment auf Vercel
 
-1. In Vercel **Add New → Project** wählen.
-2. Das GitHub-Repository `realorai` importieren.
-3. Framework Preset: **Other**.
-4. Kein Build Command notwendig.
-5. Deploy starten.
+Das Projekt ist bereits als eigenständiges Vercel-Projekt `realorai` angelegt und mit dem GitHub-Repository verbunden.
+
+- Production-Alias: `realorai-alpha.vercel.app`
+- Git-Branch: `main`
+- Framework: statische Website / kein Build-Schritt notwendig
+- Änderungen an `main` werden über die Git-Integration neu deployed.
 
 ## Bildquellen
 
