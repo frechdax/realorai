@@ -85,14 +85,19 @@ function choose(type){
   $('#resultText').textContent=correct?'✓ Richtig':'✕ Falsch';
   $('#resultText').className='result '+(correct?'good':'bad');
   $('#truthText').textContent=item.type==='ai'?'Es war: KI':'Es war: Echt';
-  $('#explanation').textContent='';
-  $('#explanation').style.display='none';
+  if(item.type==='ai'){
+    $('#explanation').textContent=`Warum KI? ${item.note}`;
+    $('#explanation').style.display='block';
+  }else{
+    $('#explanation').textContent='';
+    $('#explanation').style.display='none';
+  }
   $('#nextBtn').style.display='none';
   setTimeout(()=>feedback.classList.add('show'),180);
   autoNextTimer=setTimeout(()=>{
     feedback.classList.remove('show');
     next();
-  },1300);
+  },3000);
 }
 function next(){
   if(!locked)return;
