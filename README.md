@@ -30,11 +30,11 @@ Enthalten sind:
 - Tastatursteuerung am Desktop
 - Punkte und Streak
 - Fortschrittsanzeige
-- Auflösung und Erklärung nach jeder Runde
+- Auflösung nach jeder Runde\n- bei KI-Bildern konkrete Begründung / Erkennungsmerkmale, ca. 6 Sekunden sichtbar
 - lokaler Bestwert via `localStorage`
 - Web Share API mit Clipboard-Fallback
 - einmalige Swipe-Einführung
-- 12 Beispielrunden
+- 40 Bilder im Gesamtpool (20 KI / 20 echte Fotos)\n- 15 zufällig ausgewählte Runden pro Spiel
 
 ## Projektstruktur
 
